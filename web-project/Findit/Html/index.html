@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIt - Lost & Found Platform</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <header>
+        <h1>FindIt</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="../PHP/login.php">Login</a>
+            <a href="#report">Report Item</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="feed">
+            <h2>Recent Posts</h2>
+            <div class="post">
+                <h3>Lost: Blue Backpack</h3>
+                <p>Description: Contains books and laptop. Lost at university library.</p>
+                <p>Date: April 20, 2026</p>
+            </div>
+            <!-- More posts will be added dynamically -->
+        </section>
+
+        <section id="report">
+            <h2>Report Lost or Found Item</h2>
+            <form action="../PHP/login.php" method="post">
+                <label for="type">Type:</label>
+                <select id="type" name="type">
+                    <option value="lost">Lost</option>
+                    <option value="found">Found</option>
+                </select>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FindIt Platform</p>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>
