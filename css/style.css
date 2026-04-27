@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    color: #1d3557;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navbar {
+    background: white;
+    padding: 18px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1d72f3;
+}
+
+.nav-links a {
+    margin-left: 18px;
+    color: #1d3557;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #1d72f3;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.btn,
+button {
+    background: #1d72f3;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover,
+button:hover {
+    background: #1557b0;
+}
+
+.danger {
+    background: #e63946;
+}
+
+.danger:hover {
+    background: #b8202d;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d7dce5;
+    border-radius: 10px;
+    margin: 8px 0 14px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.page-title {
+    margin-bottom: 20px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 13px;
+    border-radius: 20px;
+    background: #ffe8a3;
+    color: #8a5a00;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.post-img,
+.profile-img {
+    max-width: 100%;
+    border-radius: 14px;
+}
+
+.profile-header {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.profile-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.table th {
+    background: #f1f5ff;
+}
