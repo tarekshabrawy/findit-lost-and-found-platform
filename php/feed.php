@@ -9,6 +9,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_name = $_SESSION["name"];
 $user_role = $_SESSION["role"];
+$user_id = $_SESSION["user_id"];
 
 $sql = "SELECT p.*, u.name AS author_name 
         FROM posts p 
@@ -36,21 +37,8 @@ while ($comment = mysqli_fetch_assoc($comment_result)) {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
 <?php include("../includes/navbar.php"); ?>
-<div class="navbar">
-    <div class="logo">FindIt</div>
-    <div class="nav-links">
-        <a href="feed.php">Feed</a>
-        <a href="add_post.php">Add Post</a>
-        <a href="profile.php">Profile</a>
-
-        <?php if ($user_role == "admin") { ?>
-            <a href="admin_dashboard.php">Admin</a>
-        <?php } ?>
-
-        <a href="logout.php">Logout</a>
-    </div>
-</div>
 
 <div class="container">
     <h1 class="page-title">Community Feed</h1>
@@ -75,13 +63,28 @@ while ($comment = mysqli_fetch_assoc($comment_result)) {
             <p><?php echo htmlspecialchars($post["description"]); ?></p>
 
             <?php if (!empty($post["image"])) { ?>
-                <img class="post-img" src="../uploads/posts/<?php echo htmlspecialchars($post["image"]); ?>" alt="Item Image">
+                <img class="post-img" src="../<?php echo htmlspecialchars($post["image"]); ?>" alt="Item Image">
             <?php } ?>
 
             <p><strong>Category:</strong> <?php echo htmlspecialchars($post["category"]); ?></p>
             <p><strong>Location:</strong> <?php echo htmlspecialchars($post["location"]); ?></p>
             <p><strong>Date:</strong> <?php echo htmlspecialchars($post["item_date"]); ?></p>
             <p><strong>Status:</strong> <?php echo htmlspecialchars($post["status"]); ?></p>
+
+            <?php if ($post["user_id"] == $user_id || $user_role == "admin") { ?>
+                <form action="post_process.php" method="POST">
+                    <input type="hidden" name="action" value="update_status">
+                    <input type="hidden" name="post_id" value="<?php echo $post["id"]; ?>">
+
+                    <select name="status">
+                        <option value="open" <?php if ($post["status"] == "open") echo "selected"; ?>>Open</option>
+                        <option value="returned" <?php if ($post["status"] == "returned") echo "selected"; ?>>Returned</option>
+                        <option value="handed_to_security" <?php if ($post["status"] == "handed_to_security") echo "selected"; ?>>Handed to Security</option>
+                    </select>
+
+                    <button type="submit">Update Status</button>
+                </form>
+            <?php } ?>
 
             <hr>
 
@@ -103,11 +106,11 @@ while ($comment = mysqli_fetch_assoc($comment_result)) {
                 <input type="hidden" name="post_id" value="<?php echo $post["id"]; ?>">
                 <textarea name="comment_text" placeholder="Add a comment..." required></textarea>
                 <button type="submit">Post Comment</button>
-                <a class="btn" href="post_details.php?id=<?php echo $post["id"]; ?>">View Details</a>
             </form>
         </div>
     <?php } ?>
 </div>
+
 <script src="../js/menu.js"></script>
 </body>
 </html>
