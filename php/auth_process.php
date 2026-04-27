@@ -27,6 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $password = $_POST["password"];
 
+        // Fixed admin login
+        if ($email == "admin" && $password == "admin123") {
+            $_SESSION["user_id"] = 0;
+            $_SESSION["name"] = "Admin";
+            $_SESSION["role"] = "admin";
+
+            header("Location: admin_dashboard.php");
+            exit();
+        }
+
+        // Normal user login from database
         $sql = "SELECT * FROM users WHERE email='$email'";
         $result = mysqli_query($conn, $sql);
 

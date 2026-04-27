@@ -36,7 +36,7 @@ while ($comment = mysqli_fetch_assoc($comment_result)) {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
+<?php include("../includes/navbar.php"); ?>
 <div class="navbar">
     <div class="logo">FindIt</div>
     <div class="nav-links">
@@ -108,6 +108,6 @@ while ($comment = mysqli_fetch_assoc($comment_result)) {
         </div>
     <?php } ?>
 </div>
-
+<script src="../js/menu.js"></script>
 </body>
 </html>

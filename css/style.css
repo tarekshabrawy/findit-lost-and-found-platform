@@ -22,23 +22,104 @@ a {
     box-shadow: 0 4px 18px rgba(0,0,0,0.06);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
 }
 
 .logo {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
     color: #1d72f3;
 }
 
-.nav-links a {
-    margin-left: 18px;
+.burger-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: #1d72f3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger-btn span {
+    width: 22px;
+    height: 3px;
+    background: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.burger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.burger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+}
+
+.menu-panel {
+    position: absolute;
+    top: 75px;
+    right: 35px;
+    width: 290px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    padding: 20px;
+    display: none;
+}
+
+.menu-panel.active {
+    display: block;
+}
+
+.menu-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+}
+
+.menu-header h3 {
+    margin: 0;
+    color: #1d3557;
+}
+
+.menu-header p {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.menu-panel a {
+    display: block;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 10px;
     color: #1d3557;
     font-weight: bold;
 }
 
-.nav-links a:hover {
+.menu-panel a:hover {
+    background: #eef4ff;
     color: #1d72f3;
+}
+
+.admin-link {
+    background: #fff3cd;
+    color: #8a5a00 !important;
+}
+
+.logout-link {
+    background: #ffe5e5;
+    color: #d62828 !important;
 }
 
 .container {
@@ -64,6 +145,7 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
+    display: inline-block;
 }
 
 .btn:hover,
@@ -109,10 +191,12 @@ textarea {
     font-weight: bold;
 }
 
-.post-img,
-.profile-img {
-    max-width: 100%;
+.post-img {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
     border-radius: 14px;
+    margin: 15px 0;
 }
 
 .profile-header {
@@ -144,4 +228,30 @@ textarea {
 
 .table th {
     background: #f1f5ff;
+}
+
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-box {
+    background: white;
+    padding: 45px;
+    border-radius: 25px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+    max-width: 650px;
+}
+
+.hero-box h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero-box p {
+    font-size: 20px;
+    color: #555;
 }
