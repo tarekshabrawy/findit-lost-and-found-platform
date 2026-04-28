@@ -27,7 +27,9 @@ body {
     gap: 12px;
 }
 
-.header .user-info span,
+.header .user-info a {
+    text-decoration: none;
+    padding: 10px 1span,
 .header .user-info a {
     color: #1d72f3;
     font-size: 14px;
@@ -43,9 +45,7 @@ body {
 
 .header .user-info a:hover {
     background: #1d72f3;
-    color: white;
-}
-
+    color: white
 .container {
     max-width: 920px;
     margin: 24px auto;
@@ -74,7 +74,14 @@ body {
 
 .post-card,
 .form-box,
-.detail-card {
+.detail-card {2px 40px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12
     background: white;
     border-radius: 18px;
     box-shadow: 0 10px 35px rgba(0,0,0,0.06);
@@ -103,37 +110,38 @@ body {
 }
 
 .post-author,
-.comment-author {
-    font-weight: 700;
-    color: #1d3557;
-}
-
-.post-type,
-.status-badge {
-    padding: 6px 10px;
-    border-radius: 999px;
+.comment-auth8px 14px;
+    border-radius: 10px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .5px;
     text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .post-type.lost {
-    background: #fddede;
-    color: #c62828;
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+    color: #7f1d1d;
 }
 
 .post-type.found {
-    background: #d7f3e3;
-    color: #1b6836;
+    background: linear-gradient(135deg, #86efac 0%, #22c55e 100%);
+    color: #1b4332;
 }
 
 .status-open {
-    background: #fff3cd;
-    color: #856404;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #78350f;
 }
 
 .status-returned {
+    background: linear-gradient(135deg, #86efac 0%, #22c55e 100%);
+    color: #1b4332;
+}
+
+.status-handed_to_security {
+    background: linear-gradient(135deg, #67e8f9 0%, #06b6d4 100%);
+    color: #164e63
     background: #d4edda;
     color: #155724;
 }
@@ -150,18 +158,19 @@ body {
     padding: 20px;
 }
 
-.post-title {
-    font-size: 20px;
+.post-title {2px;
     font-weight: 700;
-    margin: 0 0 10px;
-    color: #1d3557;
+    margin: 0 0 12px;
+    color: #1a202c;
 }
 
 .post-description,
 .detail-text,
 .comment-text {
-    color: #555;
-    line-height: 1.75;
+    color: #4a5568;
+    line-height: 1.8;
+    margin: 0 0 16px;
+    font-size: 15.75;
     margin: 0 0 16px;
 }
 
@@ -208,32 +217,41 @@ body {
 
 button,
 input[type="submit"],
-.buttons a,
-.secondary-button {
-    background: #1d72f3;
+.buttons a,linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
     color: white;
     font-weight: 700;
-    padding: 12px 18px;
+    padding: 12px 24px;
     border-radius: 12px;
     cursor: pointer;
     text-decoration: none;
-    transition: transform .15s ease, background .15s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    font-size: 14px;
 }
 
 button:hover,
 input[type="submit"]:hover,
 .buttons a:hover,
 .secondary-button:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5
     background: #1557b0;
     transform: translateY(-1px);
 }
 
 .comment-list {
-    margin-top: 20px;
+    margin-top: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    transition: all 0.3s ease;
 }
 
-.comment-item {
+.comment-item:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)
     background: #f8f9fb;
     border-radius: 14px;
     padding: 16px;
@@ -244,13 +262,31 @@ input[type="submit"]:hover,
     margin-bottom: 6px;
 }
 
-.comment-box {
-    border-top: 1px solid #eef0f4;
+.comment-box {2px;
+    border: 2px solid #e0e7ff;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-bottom: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
 }
 
-.comment-box textarea,
-.form-box input,
-.form-box textarea,
+.comment-box textarea:focus,
+.form-box input:focus,
+.form-box textarea:focus,
+.form-box select:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadoa202c;
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text0 0 4px rgba(102, 126, 234, 0.1)
 .form-box select {
     width: 100%;
     padding: 14px 16px;

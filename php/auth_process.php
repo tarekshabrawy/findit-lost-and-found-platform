@@ -16,10 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$name', '$email', '$password', '$major', '$student_id', 'user')";
 
         if (mysqli_query($conn, $sql)) {
-            header("Location: login.php");
+            header("Location: login.php?message=Registration successful! Please login.");
             exit();
         } else {
-            echo "Registration failed: " . mysqli_error($conn);
+            header("Location: login.php?error=Registration failed. Please try again.");
+            exit();
         }
     }
 
@@ -56,10 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 exit();
             } else {
-                echo "Wrong password";
+                header("Location: login.php?error=Incorrect password. Please try again.");
+                exit();
             }
         } else {
-            echo "User not found";
+            header("Location: login.php?error=User not found. Please register first.");
+            exit();
         }
     }
 }

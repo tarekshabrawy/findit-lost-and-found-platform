@@ -25,7 +25,18 @@ if (isset($_SESSION["user_id"])) {
 <div class="container">
     <div class="card" style="max-width: 450px; margin: 80px auto;">
         <h1 class="page-title">Login</h1>
-
+        <?php
+        if (isset($_GET["error"])) {
+            echo '<div style="background: #ffe5e5; color: #d62828; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #d62828;">
+                    <strong>⚠️ Error:</strong> ' . htmlspecialchars($_GET["error"]) . '
+                  </div>';
+        }
+        if (isset($_GET["message"])) {
+            echo '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #28a745;">
+                    <strong>✓ Success:</strong> ' . htmlspecialchars($_GET["message"]) . '
+                  </div>';
+        }
+        ?>
         <form action="auth_process.php" method="POST">
             <input type="hidden" name="action" value="login">
 
