@@ -1,0 +1,119 @@
+/* ============================================
+   FindIt — pages/test.css  (add_post page)
+   ============================================ */
+
+body {
+  background: var(--cream);
+}
+
+/* ─── Form box ─── */
+.form-box {
+  max-width: 700px;
+  margin: var(--space-8) auto;
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10) var(--space-10);
+  box-shadow: var(--card-shadow);
+  animation: cardIn 0.45s var(--ease) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-box h2 {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-2);
+}
+
+.form-box .feedback-message {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-8);
+  border-bottom: var(--border);
+  padding-bottom: var(--space-5);
+}
+
+/* ─── Grid ─── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.form-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ─── Actions ─── */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+}
+
+.form-actions input[type="submit"] {
+  padding: 11px 28px;
+  font-size: 0.92rem;
+  border-radius: var(--radius-md);
+  background: var(--navy);
+  color: var(--text-inverse);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: all var(--transition);
+}
+
+.form-actions input[type="submit"]:hover {
+  background: var(--navy-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15,27,45,0.2);
+}
+
+/* ─── File input styling ─── */
+input[type="file"] {
+  padding: 9px 12px;
+  background: var(--muted);
+  border: 1.5px dashed var(--card-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+input[type="file"]:hover {
+  border-color: var(--navy);
+}
+
+/* ─── Header (legacy) ─── */
+.header {
+  padding: 0 var(--space-8);
+}
+
+.header h1 {
+  font-size: 1.45rem;
+}
+
+@media (max-width: 640px) {
+  .form-box {
+    padding: var(--space-6) var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid > [style*="grid-column"] {
+    grid-column: 1 !important;
+  }
+}

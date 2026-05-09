@@ -1,249 +1,129 @@
 /* ============================================
-   FindIT — pages/admin.css
-   Admin dashboard page
+   FindIt — pages/admin.css
    ============================================ */
 
-/* ── Admin Layout ──────────────────────────── */
-.admin-layout {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
-  min-height: 100vh;
+body {
+  background: var(--cream);
 }
 
-/* ── Admin Sidebar ─────────────────────────── */
-.admin-sidebar {
-  background-color: var(--color-primary-dark);
-  color: var(--color-text-inverse);
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-6);
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
+.container {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-16);
 }
 
-.admin-logo {
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-extrabold);
-  letter-spacing: -0.01em;
-  padding-bottom: var(--space-6);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+/* ─── Page title ─── */
+.page-title {
+  font-size: 1.7rem;
+  margin-bottom: var(--space-8);
+}
+
+/* ─── Admin cards ─── */
+.card {
   margin-bottom: var(--space-6);
+  overflow: hidden;
+  animation: cardIn 0.4s var(--ease) both;
 }
 
-.admin-nav-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  margin-bottom: var(--space-6);
+.card:nth-child(2) { animation-delay: 0.05s; }
+.card:nth-child(3) { animation-delay: 0.10s; }
+.card:nth-child(4) { animation-delay: 0.15s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.admin-nav-label {
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-semibold);
+.card h2 {
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.4);
-  padding: 0 var(--space-3);
-  margin-bottom: var(--space-2);
-}
-
-.admin-nav-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  color: rgba(255,255,255,0.7);
-  cursor: pointer;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast);
-  text-decoration: none;
-}
-
-.admin-nav-item:hover {
-  background-color: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,1);
-}
-
-.admin-nav-item.active {
-  background-color: rgba(255,255,255,0.15);
-  color: white;
-  font-weight: var(--font-weight-semibold);
-}
-
-/* ── Admin Main Content ────────────────────── */
-.admin-main {
-  background-color: var(--color-bg);
-  padding: var(--space-8);
-  overflow-y: auto;
-  animation: fadeIn 0.3s ease;
-}
-
-.admin-page-header {
-  margin-bottom: var(--space-8);
-}
-
-.admin-page-title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-weight-extrabold);
-  color: var(--color-text-primary);
-  letter-spacing: -0.01em;
-}
-
-.admin-page-subtitle {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  margin-top: var(--space-1);
-}
-
-/* ── Stat Cards ────────────────────────────── */
-.admin-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-5);
-  margin-bottom: var(--space-8);
-}
-
-.admin-stat-card {
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  transition: box-shadow var(--transition-base);
-}
-
-.admin-stat-card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.admin-stat-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.admin-stat-icon-primary   { background-color: rgba(71, 94, 103, 0.12); color: var(--color-primary); }
-.admin-stat-icon-secondary { background-color: rgba(164, 180, 190, 0.2); color: var(--color-secondary-dark); }
-.admin-stat-icon-tertiary  { background-color: rgba(220, 200, 188, 0.3); color: var(--color-tertiary-dark); }
-.admin-stat-icon-danger    { background-color: var(--color-danger-light); color: var(--color-danger); }
-
-.admin-stat-value {
-  font-size: var(--text-3xl);
-  font-weight: var(--font-weight-extrabold);
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.admin-stat-label {
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-}
-
-.admin-stat-change {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-semibold);
-}
-
-.admin-stat-change.up   { color: var(--color-success); }
-.admin-stat-change.down { color: var(--color-danger); }
-
-/* ── Data Table ────────────────────────────── */
-.admin-table-wrapper {
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
-  overflow: hidden;
-}
-
-.admin-table-header {
+  color: var(--text-muted);
+  font-family: var(--font-body);
   padding: var(--space-5) var(--space-6);
-  border-bottom: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  border-bottom: var(--border);
+  margin: 0 calc(-1 * var(--space-8));
+  padding-left: var(--space-8);
 }
 
-.admin-table {
+/* ─── Tables ─── */
+.table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--text-sm);
+  font-size: 0.88rem;
 }
 
-.admin-table thead {
-  background-color: var(--color-bg);
-}
-
-.admin-table th {
-  padding: var(--space-3) var(--space-5);
-  text-align: left;
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-semibold);
+.table th {
+  background: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-text-muted);
-  border-bottom: 1px solid var(--color-border);
-  white-space: nowrap;
+  color: var(--text-muted);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 2px solid var(--card-border);
 }
 
-.admin-table td {
-  padding: var(--space-4) var(--space-5);
-  color: var(--color-text-primary);
-  border-bottom: 1px solid var(--color-border);
+.table td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-secondary);
+  border-bottom: var(--border);
   vertical-align: middle;
+  font-size: 0.88rem;
 }
 
-.admin-table tr:last-child td {
+.table tr:last-child td {
   border-bottom: none;
 }
 
-.admin-table tbody tr {
-  transition: background-color var(--transition-fast);
+.table tr:hover td {
+  background: var(--muted);
 }
 
-.admin-table tbody tr:hover {
-  background-color: var(--color-bg);
+/* ─── Delete button in table ─── */
+.table button.danger,
+.table .danger {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: all var(--transition);
 }
 
-.admin-table-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
+/* ─── Overflow tables on mobile ─── */
+.card {
+  overflow-x: auto;
 }
 
-/* ── Responsive ────────────────────────────── */
-@media (max-width: 1100px) {
-  .admin-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Stats row at top (optional future use) */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
 }
 
-@media (max-width: 768px) {
-  .admin-layout {
-    grid-template-columns: 1fr;
-  }
+.stat-card {
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: center;
+  box-shadow: var(--card-shadow);
+}
 
-  .admin-sidebar {
-    display: none;
-  }
+.stat-card .stat-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--navy);
+  display: block;
+}
 
-  .admin-stats-grid {
-    grid-template-columns: 1fr;
-  }
+.stat-card .stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
 }

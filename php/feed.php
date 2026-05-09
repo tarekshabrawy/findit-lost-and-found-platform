@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 include("../includes/db.php");
 
@@ -34,10 +34,11 @@ while ($comment = mysqli_fetch_assoc($comment_result)) {
 <head>
     <meta charset="UTF-8">
     <title>FindIt - Feed</title>
-    <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/layout.css">
-<link rel="stylesheet" href="/css/components.css">
-<link rel="stylesheet" href="/css/pages/feed.css">
+    <link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/pages/feed.css">
 </head>
 <body>
 

@@ -1,255 +1,202 @@
 /* ============================================
-   FindIT — pages/feed.css
-   Main feed / home page
+   FindIt — pages/feed.css
+   Community feed page
    ============================================ */
 
-/* ── Feed Layout ───────────────────────────── */
-.feed-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr 280px;
-  gap: var(--space-6);
-  align-items: start;
-  padding-block: var(--space-8);
+body {
+  background: var(--cream);
 }
 
-/* ── Feed Sidebar (left) ───────────────────── */
-.feed-sidebar {
-  position: sticky;
-  top: calc(var(--navbar-height) + var(--space-6));
+/* ─── Page header row ─── */
+.feed-header {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.sidebar-card {
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
-  padding: var(--space-5);
-}
-
-.sidebar-nav-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast);
-}
-
-.sidebar-nav-item:hover,
-.sidebar-nav-item.active {
-  background-color: rgba(71, 94, 103, 0.08);
-  color: var(--color-primary-dark);
-}
-
-.sidebar-nav-item.active {
-  font-weight: var(--font-weight-semibold);
-}
-
-/* ── Feed Main ─────────────────────────────── */
-.feed-main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  min-width: 0;
-}
-
-/* ── Create Post Bar ───────────────────────── */
-.create-post-bar {
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
-  padding: var(--space-4) var(--space-5);
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  transition: box-shadow var(--transition-base);
-}
-
-.create-post-bar:hover {
-  box-shadow: var(--shadow-sm);
-}
-
-.create-post-input {
-  flex: 1;
-  background-color: var(--color-bg);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-full);
-  padding: var(--space-3) var(--space-5);
-  font-family: var(--font-family);
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition: border-color var(--transition-fast);
-}
-
-.create-post-input:hover {
-  border-color: var(--color-primary);
-  color: var(--color-text-primary);
-}
-
-/* ── Post Card ─────────────────────────────── */
-.post-card {
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-xs);
-  overflow: hidden;
-  animation: fadeUp 0.4s ease both;
-  transition:
-    box-shadow var(--transition-base),
-    border-color var(--transition-base);
-}
-
-.post-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-border-strong);
-}
-
-/* Stagger animation for feed items */
-.post-card:nth-child(1) { animation-delay: 0.05s; }
-.post-card:nth-child(2) { animation-delay: 0.10s; }
-.post-card:nth-child(3) { animation-delay: 0.15s; }
-.post-card:nth-child(4) { animation-delay: 0.20s; }
-.post-card:nth-child(5) { animation-delay: 0.25s; }
-
-.post-header {
-  padding: var(--space-5) var(--space-5) 0;
-  display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+  padding: var(--space-10) 0 0;
 }
 
-.post-author {
+.feed-header .page-title {
+  margin-bottom: 0;
+}
+
+/* ─── Container offset ─── */
+.container {
+  padding-top: var(--space-8);
+}
+
+/* ─── Feed post cards ─── */
+.card {
+  margin-bottom: var(--space-5);
+  transition: box-shadow var(--transition), transform var(--transition);
+  animation: feedCardIn 0.4s var(--ease) both;
+}
+
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+@keyframes feedCardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger cards */
+.card:nth-child(1)  { animation-delay: 0.05s; }
+.card:nth-child(2)  { animation-delay: 0.10s; }
+.card:nth-child(3)  { animation-delay: 0.15s; }
+.card:nth-child(4)  { animation-delay: 0.20s; }
+.card:nth-child(5)  { animation-delay: 0.25s; }
+
+/* ─── Post header row ─── */
+.post-meta-row {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-}
-
-.post-author-info {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
 }
 
 .post-author-name {
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-.post-meta {
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
+/* ─── Post title ─── */
+.card h2 {
+  font-size: 1.2rem;
+  margin: var(--space-2) 0 var(--space-3);
+  line-height: 1.3;
 }
 
-.post-body {
-  padding: var(--space-4) var(--space-5);
-}
-
-.post-title {
-  font-size: var(--text-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--space-2);
-  line-height: var(--leading-snug);
-}
-
-.post-text {
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-normal);
-}
-
-.post-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  margin-block: var(--space-3);
-}
-
-.post-tags {
+/* ─── Meta labels inline ─── */
+.post-details-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  padding: 0 var(--space-5) var(--space-3);
+  gap: var(--space-3) var(--space-6);
+  margin: var(--space-3) 0;
 }
 
-.post-actions {
-  padding: var(--space-3) var(--space-5);
-  border-top: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
+.post-detail-item {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
-.post-action-btn {
+.post-detail-item strong {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ─── Status update form (inline) ─── */
+.status-form {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  border: var(--border);
+}
+
+.status-form select {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.88rem;
+}
+
+.status-form button {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── Comment section ─── */
+.comment-section {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+}
+
+.comment-section h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-body);
+}
+
+/* Nested comment cards in feed */
+.card .card {
+  background: var(--muted);
+  box-shadow: none;
   border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast);
-  border: none;
-  background: none;
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-2);
 }
 
-.post-action-btn:hover {
-  background-color: var(--color-bg);
-  color: var(--color-text-primary);
+.card .card:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.post-action-btn.liked {
-  color: var(--color-danger);
+/* Comment form */
+.card form textarea {
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-3);
 }
 
-/* ── Right Panel ───────────────────────────── */
-.feed-aside {
-  position: sticky;
-  top: calc(var(--navbar-height) + var(--space-6));
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+.card form button[type="submit"] {
+  padding: 8px 18px;
+  font-size: 0.85rem;
 }
 
-/* ── Filter Bar ────────────────────────────── */
-.feed-filter-bar {
+/* ─── Floating add post button ─── */
+.fab {
+  position: fixed;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--navy);
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  overflow-x: auto;
-  padding-bottom: var(--space-1);
-  scrollbar-width: none;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(245,158,11,0.45);
+  text-decoration: none;
+  transition: all var(--transition);
+  z-index: 100;
+  line-height: 1;
 }
 
-.feed-filter-bar::-webkit-scrollbar {
-  display: none;
+.fab:hover {
+  background: var(--amber-light);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245,158,11,0.55);
+  color: var(--navy);
 }
 
-/* ── Responsive ────────────────────────────── */
-@media (max-width: 1100px) {
-  .feed-layout {
-    grid-template-columns: 220px 1fr;
-  }
-  .feed-aside { display: none; }
-}
-
-@media (max-width: 768px) {
-  .feed-layout {
-    grid-template-columns: 1fr;
-  }
-  .feed-sidebar { display: none; }
+/* ─── Welcome subtitle ─── */
+.container > p:first-of-type {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-6);
+  margin-top: -var(--space-3);
 }

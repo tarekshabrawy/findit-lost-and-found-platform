@@ -16,10 +16,11 @@ if (isset($_SESSION["user_id"])) {
 <head>
     <meta charset="UTF-8">
     <title>Login - FindIt</title>
-    <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/layout.css">
-<link rel="stylesheet" href="/css/components.css">
-<link rel="stylesheet" href="/css/pages/auth.css">
+    <link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/pages/auth.css">
 </head>
 <body>
 
@@ -43,13 +44,13 @@ if (isset($_SESSION["user_id"])) {
         <form action="auth_process.php" method="POST">
             <input type="hidden" name="action" value="login">
 
-            <label>Email or Admin Username</label>
-            <input type="text" name="email" placeholder="Email or admin" required>
+            <label class="form-label">Email or Admin Username</label>
+            <input type="text" name="email" placeholder="Email or admin" required class="form-input">
 
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Password" required>
+            <label class="form-label">Password</label>
+            <input type="password" name="password" placeholder="Password" required class="form-input">
 
-            <button type="submit">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
         <p>Don’t have an account? <a href="register.php">Register</a></p>

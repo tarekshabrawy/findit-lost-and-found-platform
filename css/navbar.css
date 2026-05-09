@@ -1,0 +1,201 @@
+/* ============================================
+   FindIt — navbar.css
+   Fixed top navigation bar
+   ============================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-8);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.18);
+}
+
+/* ─── Logo ─── */
+.navbar .logo {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: var(--amber);
+  letter-spacing: -0.02em;
+  cursor: default;
+  user-select: none;
+}
+
+.navbar .logo a {
+  color: var(--amber);
+  text-decoration: none;
+}
+
+/* ─── Nav links ─── */
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.navbar .nav-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(250, 247, 242, 0.72);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+
+.navbar .nav-links a:hover {
+  color: var(--text-inverse);
+  background: rgba(255,255,255,0.08);
+}
+
+.navbar .nav-links a.active {
+  color: var(--amber);
+  background: rgba(245,158,11,0.12);
+}
+
+/* ─── CTA button in nav ─── */
+.navbar .nav-links .nav-cta {
+  background: var(--amber);
+  color: var(--navy);
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  margin-left: var(--space-2);
+}
+
+.navbar .nav-links .nav-cta:hover {
+  background: var(--amber-light);
+  color: var(--navy);
+}
+
+/* ─── Mobile hamburger ─── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-inverse);
+  border-radius: 2px;
+  transition: all 250ms var(--ease);
+  transform-origin: left center;
+}
+
+/* ─── User info (legacy support) ─── */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.user-info span {
+  font-size: 0.85rem;
+  color: rgba(250,247,242,0.55);
+}
+
+.user-info a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(250,247,242,0.72);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color var(--transition), background var(--transition);
+}
+
+.user-info a:hover {
+  color: var(--text-inverse);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ─── Header (legacy fallback) ─── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-8);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.18);
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: var(--amber);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 var(--space-5);
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .navbar .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--navy-light);
+    flex-direction: column;
+    padding: var(--space-4);
+    gap: var(--space-1);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .navbar .nav-links.open {
+    display: flex;
+  }
+
+  .navbar .nav-links a {
+    width: 100%;
+    padding: 10px 14px;
+  }
+
+  .navbar .nav-links .nav-cta {
+    margin-left: 0;
+    margin-top: var(--space-2);
+  }
+
+  /* Animate hamburger to X when open */
+  .nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(1px, -1px);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(1px, 1px);
+  }
+}

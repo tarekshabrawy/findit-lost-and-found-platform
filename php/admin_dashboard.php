@@ -17,10 +17,11 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
 <head>
     <meta charset="UTF-8">
     <title>FindIt - Admin Dashboard</title>
-    <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/layout.css">
-<link rel="stylesheet" href="/css/components.css">
-<link rel="stylesheet" href="/css/pages/admin.css">
+    <link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/pages/admin.css">
 </head>
 <body>
 

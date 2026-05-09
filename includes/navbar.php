@@ -1,45 +1,31 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$isLoggedIn = isset($_SESSION["user_id"]);
-$isAdmin = isset($_SESSION["role"]) && $_SESSION["role"] === "admin";
-$userName = $_SESSION["name"] ?? "Guest";
+// includes/navbar.php
+// Determines active page for nav highlight
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
+<nav class="navbar" id="mainNavbar">
+    <div class="logo"><a href="index.php">FindIt</a></div>
 
-<nav class="navbar">
-    <div class="logo">FindIt</div>
-
-    <button class="burger-btn" id="burgerBtn" type="button">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
     </button>
 
-    <div class="menu-panel" id="menuPanel">
-        <div class="menu-header">
-            <h3>Hello, <?php echo htmlspecialchars($userName); ?></h3>
-            <p>Lost it? Found it? Let us help.</p>
-        </div>
-
-        <a href="index.php">Home</a>
-
-        <?php if ($isLoggedIn) { ?>
-            <a href="feed.php">Feed</a>
-            <a href="add_post.php">Add Post</a>
-            <a href="profile.php">Profile</a>
-
-            <?php if ($isAdmin) { ?>
-                <a class="admin-link" href="admin_dashboard.php">Admin Dashboard</a>
-            <?php } ?>
-
-            <a href="about.php">About Us</a>
-            <a class="logout-link" href="logout.php">Logout</a>
-        <?php } else { ?>
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
-            <a href="about.php">About Us</a>
-        <?php } ?>
+    <div class="nav-links" id="navLinks">
+        <?php if (isset($_SESSION["user_id"])): ?>
+            <a href="feed.php"     class="<?= $current_page === 'feed.php'    ? 'active' : '' ?>">Feed</a>
+            <a href="add_post.php" class="<?= $current_page === 'add_post.php'? 'active' : '' ?>">+ Post</a>
+            <a href="profile.php"  class="<?= $current_page === 'profile.php' ? 'active' : '' ?>">Profile</a>
+            <a href="about.php"    class="<?= $current_page === 'about.php'   ? 'active' : '' ?>">About</a>
+            <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'admin'): ?>
+                <a href="admin_dashboard.php" class="<?= $current_page === 'admin_dashboard.php' ? 'active' : '' ?>">Admin</a>
+            <?php endif; ?>
+            <a href="logout.php" class="nav-cta">Logout</a>
+        <?php else: ?>
+            <a href="about.php"    class="<?= $current_page === 'about.php'  ? 'active' : '' ?>">About</a>
+            <a href="login.php"    class="<?= $current_page === 'login.php'  ? 'active' : '' ?>">Login</a>
+            <a href="register.php" class="nav-cta">Register</a>
+        <?php endif; ?>
     </div>
 </nav>
