@@ -12,7 +12,10 @@ if (isset($_SESSION["user_id"])) {
 <head>
     <meta charset="UTF-8">
     <title>Register - FindIt</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/pages/auth.css">
 </head>
 <body>
 

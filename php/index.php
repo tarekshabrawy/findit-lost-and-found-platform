@@ -1,3 +1,5 @@
+<?php include '../includes/navbar.php'; ?>
+<link rel="stylesheet" href="/css/pages/feed.css">
 <?php
 session_start();
 ?>
@@ -7,7 +9,10 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>FindIt - Home</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/pages/feed.css">
 </head>
 <body>
 
