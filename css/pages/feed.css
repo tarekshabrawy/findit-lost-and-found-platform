@@ -1,202 +1,1285 @@
-/* ============================================
-   FindIt — pages/feed.css
-   Community feed page
-   ============================================ */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FindIt — Feed</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --space:    #25344F;
+    --slate:    #617891;
+    --tan:      #D5B893;
+    --coffee:   #6F4D38;
+    --caput:    #632024;
 
-body {
-  background: var(--cream);
-}
+    --space-light: #2e4061;
+    --slate-light: #7a92a8;
+    --tan-dim:  #b89c79;
+    --caput-dark: #4a181b;
 
-/* ─── Page header row ─── */
-.feed-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-6);
-  padding: var(--space-10) 0 0;
-}
+    --card-bg:  rgba(97,120,145,0.18);
+    --border:   rgba(213,184,147,0.13);
+    --text-main: #e8d9c4;
+    --text-muted: rgba(213,184,147,0.6);
 
-.feed-header .page-title {
-  margin-bottom: 0;
-}
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 0.22s cubic-bezier(.4,0,.2,1);
+  }
 
-/* ─── Container offset ─── */
-.container {
-  padding-top: var(--space-8);
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─── Feed post cards ─── */
-.card {
-  margin-bottom: var(--space-5);
-  transition: box-shadow var(--transition), transform var(--transition);
-  animation: feedCardIn 0.4s var(--ease) both;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--space);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-.card:hover {
-  box-shadow: var(--card-shadow-hover);
-  transform: translateY(-2px);
-}
+  /* Subtle noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
 
-@keyframes feedCardIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
 
-/* Stagger cards */
-.card:nth-child(1)  { animation-delay: 0.05s; }
-.card:nth-child(2)  { animation-delay: 0.10s; }
-.card:nth-child(3)  { animation-delay: 0.15s; }
-.card:nth-child(4)  { animation-delay: 0.20s; }
-.card:nth-child(5)  { animation-delay: 0.25s; }
+  /* ── NAVBAR ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(37,52,79,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
 
-/* ─── Post header row ─── */
-.post-meta-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-3);
-}
+  nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
 
-.post-author-name {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
 
-/* ─── Post title ─── */
-.card h2 {
-  font-size: 1.2rem;
-  margin: var(--space-2) 0 var(--space-3);
-  line-height: 1.3;
-}
+  .nav-brand .logo-icon {
+    font-size: 1.5rem;
+  }
 
-/* ─── Meta labels inline ─── */
-.post-details-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3) var(--space-6);
-  margin: var(--space-3) 0;
-}
+  .nav-brand .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--tan);
+    letter-spacing: -0.02em;
+  }
 
-.post-detail-item {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
 
-.post-detail-item strong {
-  color: var(--text-muted);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 2px;
-}
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color var(--transition);
+    letter-spacing: 0.02em;
+  }
 
-/* ─── Status update form (inline) ─── */
-.status-form {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-4);
-  padding: var(--space-3) var(--space-4);
-  background: var(--muted);
-  border-radius: var(--radius-sm);
-  border: var(--border);
-}
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: var(--tan);
+  }
 
-.status-form select {
-  flex: 1;
-  padding: 8px 12px;
-  font-size: 0.88rem;
-}
+  .nav-links a.active {
+    border-bottom: 2px solid var(--tan);
+    padding-bottom: 2px;
+  }
 
-.status-form button {
-  padding: 8px 16px;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-/* ─── Comment section ─── */
-.comment-section {
-  margin-top: var(--space-5);
-  padding-top: var(--space-5);
-  border-top: var(--border);
-}
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(97,120,145,0.2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 8px 16px;
+    transition: border-color var(--transition);
+  }
 
-.comment-section h3 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: var(--space-4);
-  font-family: var(--font-body);
-}
+  .search-bar:focus-within {
+    border-color: rgba(213,184,147,0.4);
+  }
 
-/* Nested comment cards in feed */
-.card .card {
-  background: var(--muted);
-  box-shadow: none;
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  margin-bottom: var(--space-2);
-}
+  .search-bar input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-main);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    width: 180px;
+  }
 
-.card .card:hover {
-  transform: none;
-  box-shadow: none;
-}
+  .search-bar input::placeholder { color: var(--text-muted); }
 
-/* Comment form */
-.card form textarea {
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  font-size: 0.9rem;
-  margin-bottom: var(--space-3);
-}
+  .search-bar .material-symbols-outlined {
+    color: var(--text-muted);
+    font-size: 18px;
+  }
 
-.card form button[type="submit"] {
-  padding: 8px 18px;
-  font-size: 0.85rem;
-}
+  .btn-report {
+    background: var(--caput);
+    color: #f5e6d8;
+    border: none;
+    border-radius: 50px;
+    padding: 9px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
 
-/* ─── Floating add post button ─── */
-.fab {
-  position: fixed;
-  bottom: var(--space-8);
-  right: var(--space-8);
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--amber);
-  color: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  box-shadow: 0 4px 16px rgba(245,158,11,0.45);
-  text-decoration: none;
-  transition: all var(--transition);
-  z-index: 100;
-  line-height: 1;
-}
+  .btn-report:hover {
+    background: var(--caput-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(99,32,36,0.45);
+  }
 
-.fab:hover {
-  background: var(--amber-light);
-  transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 8px 24px rgba(245,158,11,0.55);
-  color: var(--navy);
-}
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(97,120,145,0.2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    color: var(--text-muted);
+  }
 
-/* ─── Welcome subtitle ─── */
-.container > p:first-of-type {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: var(--space-6);
-  margin-top: -var(--space-3);
-}
+  .icon-btn:hover {
+    background: rgba(97,120,145,0.35);
+    color: var(--tan);
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--tan-dim);
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    display: grid;
+    grid-template-columns: 260px 1fr 280px;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── LEFT SIDEBAR ── */
+  .sidebar-left {
+    position: sticky;
+    top: 88px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .filter-card {
+    background: rgba(37,52,79,0.7);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    backdrop-filter: blur(8px);
+  }
+
+  .filter-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--tan);
+    margin-bottom: 20px;
+  }
+
+  .filter-group {
+    margin-bottom: 20px;
+  }
+
+  .filter-group label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .filter-group select,
+  .filter-group input[type="text"] {
+    width: 100%;
+    background: rgba(97,120,145,0.15);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    outline: none;
+    appearance: none;
+    transition: border-color var(--transition);
+  }
+
+  .filter-group select:focus,
+  .filter-group input:focus {
+    border-color: rgba(213,184,147,0.4);
+  }
+
+  .filter-group select option {
+    background: var(--space);
+  }
+
+  .range-wrap {
+    position: relative;
+  }
+
+  .range-wrap input[type="range"] {
+    width: 100%;
+    accent-color: var(--tan);
+    height: 4px;
+    cursor: pointer;
+  }
+
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .date-btn {
+    width: 100%;
+    background: rgba(97,120,145,0.15);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color var(--transition);
+  }
+
+  .date-btn:hover { border-color: rgba(213,184,147,0.4); }
+
+  .btn-apply {
+    width: 100%;
+    background: var(--coffee);
+    color: #f5e6d8;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-top: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  .btn-apply:hover {
+    background: #5a3e2d;
+    transform: translateY(-1px);
+  }
+
+  .community-card {
+    background: linear-gradient(135deg, var(--coffee) 0%, var(--caput) 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+
+  .community-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f5e6d8;
+    margin-bottom: 8px;
+  }
+
+  .community-card p {
+    font-size: 0.82rem;
+    color: rgba(245,230,216,0.8);
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .btn-learn {
+    width: 100%;
+    background: rgba(245,230,216,0.15);
+    border: 1px solid rgba(245,230,216,0.3);
+    border-radius: var(--radius-sm);
+    padding: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #f5e6d8;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+
+  .btn-learn:hover { background: rgba(245,230,216,0.25); }
+
+  /* ── MAIN FEED ── */
+  .feed-main {
+    min-width: 0;
+  }
+
+  .feed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .feed-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--tan);
+    letter-spacing: -0.02em;
+  }
+
+  .feed-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Category pills */
+  .category-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 24px;
+    scrollbar-width: none;
+  }
+
+  .category-strip::-webkit-scrollbar { display: none; }
+
+  .pill {
+    flex-shrink: 0;
+    padding: 7px 18px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .pill.active {
+    background: var(--tan);
+    color: var(--space);
+    border-color: var(--tan);
+  }
+
+  .pill:not(.active) {
+    background: rgba(97,120,145,0.18);
+    color: var(--text-muted);
+    border-color: var(--border);
+  }
+
+  .pill:not(.active):hover {
+    background: rgba(97,120,145,0.32);
+    color: var(--text-main);
+    border-color: rgba(213,184,147,0.25);
+  }
+
+  /* ── POST CARDS ── */
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .post-card {
+    background: rgba(37,52,79,0.75);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    transition: box-shadow var(--transition), transform var(--transition);
+    animation: cardIn 0.4s cubic-bezier(.4,0,.2,1) both;
+  }
+
+  .post-card:nth-child(1) { animation-delay: 0.05s; }
+  .post-card:nth-child(2) { animation-delay: 0.12s; }
+  .post-card:nth-child(3) { animation-delay: 0.19s; }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    border-color: rgba(213,184,147,0.22);
+  }
+
+  .post-image-wrap {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+  }
+
+  .post-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .post-card:hover .post-image-wrap img {
+    transform: scale(1.04);
+  }
+
+  .post-image-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, rgba(37,52,79,0.9), transparent);
+  }
+
+  .badge-row {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .badge {
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .badge-lost {
+    background: var(--caput);
+    color: #f5e6d8;
+    box-shadow: 0 2px 12px rgba(99,32,36,0.5);
+  }
+
+  .badge-found {
+    background: #2a5e3a;
+    color: #a8e6b8;
+    box-shadow: 0 2px 12px rgba(42,94,58,0.5);
+  }
+
+  .badge-cat {
+    background: rgba(37,52,79,0.7);
+    backdrop-filter: blur(8px);
+    color: var(--tan);
+    border: 1px solid rgba(213,184,147,0.25);
+  }
+
+  .post-body {
+    padding: 20px 22px 18px;
+  }
+
+  .post-meta-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--tan);
+    line-height: 1.3;
+  }
+
+  .post-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    background: rgba(97,120,145,0.2);
+    padding: 3px 10px;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .post-location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.82rem;
+    color: var(--slate-light);
+    margin-bottom: 12px;
+  }
+
+  .post-location .material-symbols-outlined {
+    font-size: 16px;
+    color: var(--tan-dim);
+  }
+
+  .post-text {
+    font-size: 0.9rem;
+    color: rgba(232,217,196,0.8);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-author-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .author-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--slate);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--tan);
+    overflow: hidden;
+  }
+
+  .author-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .action-group {
+    display: flex;
+    gap: 16px;
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition);
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .action-btn .material-symbols-outlined { font-size: 18px; }
+
+  .action-btn:hover { color: var(--tan); }
+
+  .btn-contact-lost {
+    background: var(--caput);
+    color: #f5e6d8;
+    border: none;
+    border-radius: 50px;
+    padding: 9px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+  }
+
+  .btn-contact-lost:hover {
+    background: var(--caput-dark);
+    box-shadow: 0 4px 16px rgba(99,32,36,0.45);
+    transform: translateY(-1px);
+  }
+
+  .btn-contact-found {
+    background: var(--coffee);
+    color: #f5e6d8;
+    border: none;
+    border-radius: 50px;
+    padding: 9px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+  }
+
+  .btn-contact-found:hover {
+    background: #5a3e2d;
+    box-shadow: 0 4px 16px rgba(111,77,56,0.45);
+    transform: translateY(-1px);
+  }
+
+  /* ── RIGHT SIDEBAR ── */
+  .sidebar-right {
+    position: sticky;
+    top: 88px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stats-card {
+    background: rgba(37,52,79,0.7);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    backdrop-filter: blur(8px);
+  }
+
+  .stats-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--tan);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74,222,128,0.6);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .activity-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .activity-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .dot-found { background: #4ade80; }
+  .dot-lost  { background: var(--caput); }
+
+  .activity-text {
+    font-size: 0.82rem;
+    color: rgba(232,217,196,0.75);
+    line-height: 1.5;
+  }
+
+  .activity-text strong {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  .resolved-card {
+    background: linear-gradient(135deg, rgba(111,77,56,0.35) 0%, rgba(99,32,36,0.35) 100%);
+    border: 1px solid rgba(213,184,147,0.2);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .resolved-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .resolved-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--tan);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .resolved-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .tips-card {
+    background: rgba(37,52,79,0.7);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    backdrop-filter: blur(8px);
+  }
+
+  .tips-card h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .tip-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: rgba(232,217,196,0.75);
+  }
+
+  .tip-item:last-child { border-bottom: none; }
+
+  .tip-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(97,120,145,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--tan);
+  }
+
+  .tip-icon .material-symbols-outlined { font-size: 16px; }
+
+  /* ── FAB ── */
+  .fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--caput);
+    color: #f5e6d8;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(99,32,36,0.55);
+    transition: all var(--transition);
+    z-index: 200;
+  }
+
+  .fab:hover {
+    background: var(--caput-dark);
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 10px 32px rgba(99,32,36,0.65);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    .page-wrapper { grid-template-columns: 240px 1fr; }
+    .sidebar-right { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .page-wrapper { grid-template-columns: 1fr; padding: 16px 16px 100px; }
+    .sidebar-left { display: none; }
+    .nav-links { display: none; }
+    .search-bar { display: none; }
+  }
+
+  /* ── BOTTOM NAV (mobile) ── */
+  .bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37,52,79,0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    z-index: 150;
+    padding: 8px 0 12px;
+    justify-content: space-around;
+  }
+
+  @media (max-width: 768px) { .bottom-nav { display: flex; } }
+
+  .nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color var(--transition);
+    padding: 4px 12px;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .nav-tab.active { color: var(--tan); }
+  .nav-tab .material-symbols-outlined { font-size: 22px; }
+
+  .nav-tab-add {
+    background: var(--caput);
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f5e6d8;
+    margin-top: -10px;
+    box-shadow: 0 4px 14px rgba(99,32,36,0.5);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <a href="#" class="nav-brand">
+      <span class="logo-icon">🔍</span>
+      <span class="logo-text">FindIt</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Feed</a></li>
+      <li><a href="#">Categories</a></li>
+      <li><a href="#">Map</a></li>
+      <li><a href="#">My Reports</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-bar">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search items..."/>
+      </div>
+      <button class="btn-report">+ Report Item</button>
+      <button class="icon-btn">
+        <span class="material-symbols-outlined" style="font-size:18px;">notifications</span>
+      </button>
+      <img class="avatar" src="https://i.pravatar.cc/80?img=11" alt="User"/>
+    </div>
+  </nav>
+</header>
+
+<!-- PAGE BODY -->
+<div class="page-wrapper">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar-left">
+    <div class="filter-card">
+      <h2>Filters</h2>
+
+      <div class="filter-group">
+        <label>Item Category</label>
+        <select>
+          <option>All Categories</option>
+          <option>Electronics</option>
+          <option>Pets</option>
+          <option>Wallets & Bags</option>
+          <option>Documents</option>
+          <option>Jewelry</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Search Radius (km)</label>
+        <div class="range-wrap">
+          <input type="range" min="1" max="100" value="15"/>
+          <div class="range-labels">
+            <span>1km</span><span>15km</span><span>100km</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Date Range</label>
+        <button class="date-btn">
+          Past 24 hours
+          <span class="material-symbols-outlined" style="font-size:16px;">expand_more</span>
+        </button>
+      </div>
+
+      <div class="filter-group">
+        <label>Status</label>
+        <select>
+          <option>All</option>
+          <option>Lost</option>
+          <option>Found</option>
+          <option>Resolved</option>
+        </select>
+      </div>
+
+      <button class="btn-apply">Apply Filters</button>
+    </div>
+
+    <div class="community-card">
+      <h3>Help the community</h3>
+      <p>Sharing posts on social media increases the chance of recovery by 40%.</p>
+      <button class="btn-learn">Learn More</button>
+    </div>
+  </aside>
+
+  <!-- MAIN FEED -->
+  <section class="feed-main">
+    <div class="feed-header">
+      <div>
+        <h1 class="feed-title">Community Feed</h1>
+        <p class="feed-subtitle">Browse lost & found items near you</p>
+      </div>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="category-strip">
+      <button class="pill active">All Items</button>
+      <button class="pill">Electronics</button>
+      <button class="pill">Pets</button>
+      <button class="pill">Wallets</button>
+      <button class="pill">Documents</button>
+      <button class="pill">Jewelry</button>
+      <button class="pill">Keys</button>
+      <button class="pill">Clothing</button>
+    </div>
+
+    <!-- Posts -->
+    <div class="post-list">
+
+      <!-- Card 1: LOST -->
+      <article class="post-card">
+        <div class="post-image-wrap">
+          <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=800&q=80" alt="iPhone"/>
+          <div class="badge-row">
+            <span class="badge badge-lost">Lost</span>
+            <span class="badge badge-cat">Electronics</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <div class="post-meta-top">
+            <h2 class="post-title">iPhone 13 Pro — Rose Gold</h2>
+            <span class="post-time">2 hrs ago</span>
+          </div>
+          <div class="post-location">
+            <span class="material-symbols-outlined">location_on</span>
+            Central Park Mall, Level 3
+          </div>
+          <div class="post-author-row">
+            <div class="author-avatar">SR</div>
+            <span class="author-name">Sarah R.</span>
+          </div>
+          <p class="post-text">Lost my phone while shopping near the food court. It has a transparent case with a Polaroid photo of a dog tucked inside. Reward offered for safe return. Please contact me if found.</p>
+          <div class="post-actions">
+            <div class="action-group">
+              <button class="action-btn">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                12 Comments
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined">share</span>
+                Share
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined">bookmark</span>
+                Save
+              </button>
+            </div>
+            <button class="btn-contact-lost">Contact Owner</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: FOUND -->
+      <article class="post-card">
+        <div class="post-image-wrap">
+          <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&q=80" alt="Wallet"/>
+          <div class="badge-row">
+            <span class="badge badge-found">Found</span>
+            <span class="badge badge-cat">Wallets</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <div class="post-meta-top">
+            <h2 class="post-title">Brown Leather Wallet & Car Keys</h2>
+            <span class="post-time">Yesterday</span>
+          </div>
+          <div class="post-location">
+            <span class="material-symbols-outlined">location_on</span>
+            5th Ave Metro Station
+          </div>
+          <div class="post-author-row">
+            <div class="author-avatar">MK</div>
+            <span class="author-name">Mohamed K.</span>
+          </div>
+          <p class="post-text">Found a wallet with keys on the bench near the platform 2 entrance. Contains some cash and an ID for "Jonathan D." — please contact me to verify identity and collect your belongings.</p>
+          <div class="post-actions">
+            <div class="action-group">
+              <button class="action-btn">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                3 Comments
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined">share</span>
+                Share
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined">bookmark</span>
+                Save
+              </button>
+            </div>
+            <button class="btn-contact-found">Contact Finder</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: LOST -->
+      <article class="post-card">
+        <div class="post-image-wrap">
+          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80" alt="Bag"/>
+          <div class="badge-row">
+            <span class="badge badge-lost">Lost</span>
+            <span class="badge badge-cat">Bags</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <div class="post-meta-top">
+            <h2 class="post-title">Handmade Canvas Tote Bag</h2>
+            <span class="post-time">4 hrs ago</span>
+          </div>
+          <div class="post-location">
+            <span class="material-symbols-outlined">location_on</span>
+            Public Library District
+          </div>
+          <div class="post-author-row">
+            <div class="author-avatar">LN</div>
+            <span class="author-name">Layla N.</span>
+          </div>
+          <p class="post-text">Left my canvas bag in the reading room. It has unique hand-painted floral designs and contains several art supplies. Very sentimental value — please reach out if you've seen it.</p>
+          <div class="post-actions">
+            <div class="action-group">
+              <button class="action-btn">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                8 Comments
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined">share</span>
+                Share
+              </button>
+              <button class="action-btn">
+                <span class="material-symbols-outlined">bookmark</span>
+                Save
+              </button>
+            </div>
+            <button class="btn-contact-lost">Contact Owner</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="sidebar-right">
+    <div class="stats-card">
+      <h3>
+        <span class="live-dot"></span>
+        Live Activity
+      </h3>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-dot dot-found"></div>
+          <p class="activity-text"><strong>Golden Retriever</strong> found in Sunnyvale 10 mins ago</p>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot dot-lost"></div>
+          <p class="activity-text"><strong>MacBook Air</strong> reported lost at Starbucks, Downtown</p>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot dot-found"></div>
+          <p class="activity-text"><strong>Car Keys</strong> returned to owner in East District</p>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot dot-lost"></div>
+          <p class="activity-text"><strong>Passport & ID</strong> reported missing near Central Station</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resolved-card">
+      <p class="resolved-label">Total Resolved Items</p>
+      <div class="resolved-count">24,892</div>
+      <p class="resolved-sub">Connecting people since 2021</p>
+    </div>
+
+    <div class="tips-card">
+      <h4>Quick Tips</h4>
+      <div class="tip-item">
+        <div class="tip-icon"><span class="material-symbols-outlined">photo_camera</span></div>
+        Add clear photos to increase recovery chance by 3×
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon"><span class="material-symbols-outlined">location_on</span></div>
+        Pinpoint the exact location on the map
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon"><span class="material-symbols-outlined">share</span></div>
+        Sharing on social boosts visibility by 40%
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- FAB -->
+<button class="fab">+</button>
+
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav">
+  <button class="nav-tab active">
+    <span class="material-symbols-outlined">home</span>
+    Feed
+  </button>
+  <button class="nav-tab">
+    <span class="material-symbols-outlined">search</span>
+    Search
+  </button>
+  <button class="nav-tab nav-tab-add">
+    <span class="material-symbols-outlined">add</span>
+  </button>
+  <button class="nav-tab">
+    <span class="material-symbols-outlined">notifications</span>
+    Activity
+  </button>
+  <button class="nav-tab">
+    <span class="material-symbols-outlined">person</span>
+    Profile
+  </button>
+</nav>
+
+<script>
+  // Category pill toggle
+  document.querySelectorAll('.pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // Bottom nav toggle
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
