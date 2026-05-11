@@ -224,29 +224,12 @@ body.dark-mode .nav-toggle {
     width: auto;
   }
 }
-/* Final logo size fix */
+
+/* ── Clean logo styling ── */
 .navbar .logo a {
   display: flex !important;
   align-items: center !important;
-  gap: 14px !important;
-}
-
-.navbar .logo .logo-text {
-  font-size: 1.55rem !important;
-  color: var(--amber) !important;
-}
-
-.navbar .logo .logo-img {
-  width: 74px !important;
-  height: 48px !important;
-  object-fit: contain !important;
-  border-radius: 6px !important;
-}
-/* Final navbar logo fix */
-.navbar .logo a {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
+  gap: 2px !important;
 }
 
 .navbar .logo .logo-text {
@@ -255,40 +238,8 @@ body.dark-mode .nav-toggle {
 }
 
 .navbar .logo .logo-img {
-  width: 58px !important;
-  height: 58px !important;
-  object-fit: cover !important;
-  object-position: left center !important;
-  border-radius: 12px !important;
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: contain !important;
+  border-radius: 8px !important;
 }
-.navbar .logo a {
-    display: flex !important;
-    align-items: center !important;
-    gap: 14px !important;
-}
-
-.navbar .logo .logo-text {
-    order: 1;
-    font-size: 1.7rem !important;
-}
-
-.navbar .logo .logo-img {
-    order: 2;
-    width: 80px !important;
-    height: 54px !important;
-    object-fit: cover !important;
-    object-position: left center !important;
-    border-radius: 10px !important;
-}
-.navbar .logo .logo-link {
-     display: flex !important;
-     align-items: center !important;
-     gap: 4px !important;
- }
-
- .navbar .logo .logo-img {
-     width: 140px !important;
-     height: 90px !important;
-     object-fit: contain !important;
-     display: block !important;
- }
