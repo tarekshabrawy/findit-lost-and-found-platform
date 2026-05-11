@@ -16,29 +16,25 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
     <title>FindIt - Admin Dashboard</title>
     <link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/navbar.css">
-<link rel="stylesheet" href="../css/pages/admin.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/pages/admin.css">
 </head>
 <body>
 
-<div class="navbar">
-    <div class="logo">FindIt Admin</div>
-    <div class="nav-links">
-        <a href="feed.php">Feed</a>
-        <a href="profile.php">Profile</a>
-        <a href="logout.php">Logout</a>
-    </div>
-</div>
+<?php include("../includes/navbar.php"); ?>
 
-<div class="container">
+<div class="container-wide main-content">
     <h1 class="page-title">Admin Dashboard</h1>
+    <p class="page-subtitle">Moderate users, posts, and comments across the FindIt platform.</p>
 
-    <div class="card">
+    <div class="card admin-card">
         <h2>Users</h2>
+
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -60,8 +56,9 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
         </table>
     </div>
 
-    <div class="card">
+    <div class="card admin-card" style="margin-top: 24px;">
         <h2>Posts</h2>
+
         <table class="table">
             <tr>
                 <th>Title</th>
@@ -81,7 +78,7 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
                         <form action="admin_process.php" method="POST">
                             <input type="hidden" name="action" value="delete_post">
                             <input type="hidden" name="post_id" value="<?php echo $post["id"]; ?>">
-                            <button class="danger" type="submit">Delete</button>
+                            <button class="btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -89,8 +86,9 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
         </table>
     </div>
 
-    <div class="card">
+    <div class="card admin-card" style="margin-top: 24px;">
         <h2>Comments</h2>
+
         <table class="table">
             <tr>
                 <th>User</th>
@@ -106,7 +104,7 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
                         <form action="admin_process.php" method="POST">
                             <input type="hidden" name="action" value="delete_comment">
                             <input type="hidden" name="comment_id" value="<?php echo $comment["id"]; ?>">
-                            <button class="danger" type="submit">Delete</button>
+                            <button class="btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -115,5 +113,6 @@ $comments = mysqli_query($conn, "SELECT c.*, u.name AS commenter_name FROM comme
     </div>
 </div>
 
+<script src="../js/menu.js"></script>
 </body>
 </html>

@@ -15,32 +15,41 @@ if (isset($_SESSION["user_id"])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
     <title>Login - FindIt</title>
     <link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/navbar.css">
-<link rel="stylesheet" href="../css/pages/auth.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/pages/auth.css">
 </head>
 <body>
 
 <?php include("../includes/navbar.php"); ?>
 
 <div class="container">
-    <div class="card" style="max-width: 450px; margin: 80px auto;">
-        <h1 class="page-title">Login</h1>
+    <div class="card auth-card" style="max-width: 450px; margin: 80px auto;">
+        <div class="auth-logo">
+    <img src="../assets/logo.png" alt="FindIt Logo">
+</div>
+    <h1 class="page-title">Login</h1>
+        
+        <p class="page-subtitle">Welcome back to FindIt. Access your campus lost and found feed.</p>
+
         <?php
         if (isset($_GET["error"])) {
-            echo '<div style="background: #ffe5e5; color: #d62828; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #d62828;">
+            echo '<div class="flash flash-error">
                     <strong>⚠️ Error:</strong> ' . htmlspecialchars($_GET["error"]) . '
                   </div>';
         }
+
         if (isset($_GET["message"])) {
-            echo '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #28a745;">
+            echo '<div class="flash flash-success">
                     <strong>✓ Success:</strong> ' . htmlspecialchars($_GET["message"]) . '
                   </div>';
         }
         ?>
+
         <form action="auth_process.php" method="POST">
             <input type="hidden" name="action" value="login">
 
@@ -53,7 +62,10 @@ if (isset($_SESSION["user_id"])) {
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
-        <p>Don’t have an account? <a href="register.php">Register</a></p>
+        <p style="margin-top: 20px;">
+            Don’t have an account?
+            <a href="register.php">Register</a>
+        </p>
     </div>
 </div>
 

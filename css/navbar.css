@@ -1,6 +1,6 @@
 /* ============================================
    FindIt — navbar.css
-   Fixed top navigation bar
+   Burger menu + theme toggle
    ============================================ */
 
 .navbar {
@@ -9,46 +9,117 @@
   left: 0;
   right: 0;
   z-index: 1000;
+
   height: 64px;
   background: var(--navy);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding: 0 var(--space-8);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.18);
+
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06),
+    0 4px 24px rgba(0,0,0,0.18);
 }
 
-/* ─── Logo ─── */
+/* Logo */
 .navbar .logo {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  color: var(--amber);
-  letter-spacing: -0.02em;
-  cursor: default;
-  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .navbar .logo a {
-  color: var(--amber);
-  text-decoration: none;
-}
-
-/* ─── Nav links ─── */
-.navbar .nav-links {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 12px;
+
+  color: var(--amber);
+  text-decoration: none;
+
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navbar .logo img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  transition: transform 0.25s ease;
+}
+
+.navbar .logo img:hover {
+  transform: scale(1.06) rotate(-4deg);
+}
+
+/* Right controls */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Theme button */
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--amber);
+  color: var(--navy);
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: var(--amber-light);
+  transform: translateY(-1px);
+}
+
+/* Nav links dropdown */
+.navbar .nav-links {
+  position: absolute;
+  top: 74px;
+  right: var(--space-8);
+
+  min-width: 230px;
+
+  display: none;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  background: var(--navy-light);
+  padding: var(--space-4);
+
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+}
+
+.navbar .nav-links.open {
+  display: flex;
 }
 
 .navbar .nav-links a {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: rgba(250, 247, 242, 0.72);
-  padding: 7px 13px;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(250, 247, 242, 0.82);
+  padding: 11px 14px;
   border-radius: var(--radius-sm);
   text-decoration: none;
   transition: color var(--transition), background var(--transition);
-  white-space: nowrap;
 }
 
 .navbar .nav-links a:hover {
@@ -58,17 +129,15 @@
 
 .navbar .nav-links a.active {
   color: var(--amber);
-  background: rgba(245,158,11,0.12);
+  background: rgba(245,158,11,0.14);
 }
 
-/* ─── CTA button in nav ─── */
 .navbar .nav-links .nav-cta {
   background: var(--amber);
   color: var(--navy);
-  font-weight: 700;
-  padding: 7px 16px;
-  border-radius: var(--radius-sm);
-  margin-left: var(--space-2);
+  font-weight: 800;
+  text-align: center;
+  margin-top: var(--space-2);
 }
 
 .navbar .nav-links .nav-cta:hover {
@@ -76,126 +145,150 @@
   color: var(--navy);
 }
 
-/* ─── Mobile hamburger ─── */
+/* Hamburger */
 .nav-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 32px;
-  height: 32px;
+
+  width: 38px;
+  height: 38px;
+
   cursor: pointer;
-  background: none;
-  border: none;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
   padding: 0;
 }
 
 .nav-toggle span {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
+  margin: 0 auto;
   background: var(--text-inverse);
   border-radius: 2px;
   transition: all 250ms var(--ease);
-  transform-origin: left center;
 }
 
-/* ─── User info (legacy support) ─── */
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
 
-.user-info span {
-  font-size: 0.85rem;
-  color: rgba(250,247,242,0.55);
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
 }
 
-.user-info a {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: rgba(250,247,242,0.72);
-  padding: 7px 13px;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: color var(--transition), background var(--transition);
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-.user-info a:hover {
-  color: var(--text-inverse);
-  background: rgba(255,255,255,0.08);
+/* Dark mode navbar */
+body.dark-mode .navbar {
+  background: #25344F;
 }
 
-/* ─── Header (legacy fallback) ─── */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: 64px;
-  background: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--space-8);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.18);
+body.dark-mode .navbar .nav-links {
+  background: #617891;
 }
 
-.header h1 {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  color: var(--amber);
+body.dark-mode .navbar .nav-links a {
+  color: #F7F6F2;
 }
 
-/* ─── Mobile ─── */
+body.dark-mode .navbar .nav-links a.active {
+  color: #D5B893;
+  background: rgba(213,184,147,0.18);
+}
+
+body.dark-mode .theme-toggle {
+  background: #D5B893;
+  color: #25344F;
+}
+
+body.dark-mode .nav-toggle {
+  background: rgba(213,184,147,0.18);
+}
+
+/* Mobile */
 @media (max-width: 640px) {
   .navbar {
     padding: 0 var(--space-5);
   }
 
-  .nav-toggle {
-    display: flex;
-  }
-
   .navbar .nav-links {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: var(--navy-light);
-    flex-direction: column;
-    padding: var(--space-4);
-    gap: var(--space-1);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    top: 70px;
+    left: var(--space-4);
+    right: var(--space-4);
+    width: auto;
   }
+}
+/* Final logo size fix */
+.navbar .logo a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
 
-  .navbar .nav-links.open {
-    display: flex;
-  }
+.navbar .logo .logo-text {
+  font-size: 1.55rem !important;
+  color: var(--amber) !important;
+}
 
-  .navbar .nav-links a {
-    width: 100%;
-    padding: 10px 14px;
-  }
+.navbar .logo .logo-img {
+  width: 74px !important;
+  height: 48px !important;
+  object-fit: contain !important;
+  border-radius: 6px !important;
+}
+/* Final navbar logo fix */
+.navbar .logo a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
 
-  .navbar .nav-links .nav-cta {
-    margin-left: 0;
-    margin-top: var(--space-2);
-  }
+.navbar .logo .logo-text {
+  font-size: 1.7rem !important;
+  color: var(--amber) !important;
+}
 
-  /* Animate hamburger to X when open */
-  .nav-toggle.open span:nth-child(1) {
-    transform: rotate(45deg) translate(1px, -1px);
-  }
-  .nav-toggle.open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  .nav-toggle.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(1px, 1px);
-  }
+.navbar .logo .logo-img {
+  width: 58px !important;
+  height: 58px !important;
+  object-fit: cover !important;
+  object-position: left center !important;
+  border-radius: 12px !important;
+}
+.navbar .logo a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.navbar .logo .logo-text {
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+}
+
+.navbar .logo .logo-img {
+    order: 2;
+    width: 80px !important;
+    height: 54px !important;
+    object-fit: cover !important;
+    object-position: left center !important;
+    border-radius: 10px !important;
+}
+.navbar .logo .logo-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.navbar .logo .logo-img {
+    width: 140px !important;
+    height: 90px !important;
+    object-fit: contain !important;
+    display: block !important;
 }

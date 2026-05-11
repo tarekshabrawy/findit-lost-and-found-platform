@@ -111,3 +111,31 @@ body {
     align-items: center;
   }
 }
+.profile-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 99999 !important;
+
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(6px);
+
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.profile-modal.show {
+    display: flex !important;
+}
+
+.profile-modal img {
+    width: min(420px, 85vw);
+    height: min(420px, 85vw);
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--amber);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}

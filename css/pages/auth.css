@@ -131,3 +131,29 @@ div[style*="background: #d4edda"] {
   font-size: 0.9rem !important;
   font-family: var(--font-body) !important;
 }
+.auth-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.auth-logo img {
+    width: 190px;
+    max-width: 80%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 14px;
+}
+.auth-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.auth-logo img {
+    width: 220px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 16px;
+}

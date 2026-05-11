@@ -7,42 +7,48 @@
 
 /* ─── Design Tokens ─── */
 :root {
-  /* Core palette */
-  --navy:        #0f1b2d;
-  --navy-light:  #1a2d47;
-  --navy-mid:    #243554;
-  --amber:       #f59e0b;
-  --amber-light: #fcd34d;
-  --amber-dim:   #b45309;
-  --cream:       #faf7f2;
+  /* LIGHT MODE PALETTE */
+  --navy:        #2D3B4F;
+  --navy-light:  #6E7D91;
+  --navy-mid:    #2D3B4F;
+
+  --amber:       #C8A882;
+  --amber-light: #D5B893;
+  --amber-dim:   #8B6B56;
+
+  --cream:       #F7F6F2;
   --paper:       #ffffff;
-  --muted:       #f4f1eb;
+  --muted:       #E8DDD1;
 
   /* Text */
-  --text-primary:   #0f1b2d;
-  --text-secondary: #4a5568;
-  --text-muted:     #8896a5;
-  --text-inverse:   #faf7f2;
+  --text-primary:   #2D3B4F;
+  --text-secondary: #6E7D91;
+  --text-muted:     #6E7D91;
+  --text-inverse:   #F7F6F2;
 
   /* Status */
-  --lost-bg:       #fff1f2;
-  --lost-text:     #be123c;
-  --lost-border:   #fecdd3;
-  --found-bg:      #f0fdf4;
-  --found-text:    #166534;
-  --found-border:  #bbf7d0;
-  --open-bg:       #eff6ff;
-  --open-text:     #1d4ed8;
-  --returned-bg:   #f0fdf4;
-  --returned-text: #166534;
-  --security-bg:   #fefce8;
-  --security-text: #92400e;
+  --lost-bg:       #F4E6E6;
+  --lost-text:     #8B454B;
+  --lost-border:   #D9B9BC;
+
+  --found-bg:      #E8DDD1;
+  --found-text:    #8B6B56;
+  --found-border:  #C8A882;
+
+  --open-bg:       #D7DCE2;
+  --open-text:     #2D3B4F;
+
+  --returned-bg:   #E8DDD1;
+  --returned-text: #8B6B56;
+
+  --security-bg:   #EFE2D2;
+  --security-text: #8B454B;
 
   /* Surfaces */
   --card-bg:      #ffffff;
-  --card-border:  #e8e2d9;
-  --card-shadow:  0 1px 3px rgba(15,27,45,0.06), 0 4px 16px rgba(15,27,45,0.04);
-  --card-shadow-hover: 0 4px 12px rgba(15,27,45,0.1), 0 12px 32px rgba(15,27,45,0.08);
+  --card-border:  #D7DCE2;
+  --card-shadow:  0 8px 24px rgba(45,59,79,0.08);
+  --card-shadow-hover: 0 12px 32px rgba(45,59,79,0.14);
 
   /* Borders & Radius */
   --radius-sm:  6px;
@@ -389,4 +395,128 @@ input[type="submit"]:active,
   background: var(--muted);
   color: var(--text-secondary);
   border: 1px solid var(--card-border);
+}
+/* ============================================
+   FindIt — Light/Dark Theme Palettes
+   ============================================ */
+
+/* LIGHT MODE */
+body {
+  --light-bg: #F7F6F2;
+  --light-surface: #E8DDD1;
+  --light-text: #2D3B4F;
+  --light-muted: #6E7D91;
+  --light-accent: #C8A882;
+  --light-coffee: #8B6B56;
+  --light-danger: #8B454B;
+  --light-border: #D7DCE2;
+
+  background: var(--light-bg);
+  color: var(--light-text);
+}
+
+body .card,
+body .hero-box,
+body .auth-card,
+body .profile-card,
+body .admin-card {
+  background: #ffffff;
+  border-color: var(--light-border);
+}
+
+body p {
+  color: var(--light-muted);
+}
+
+/* DARK MODE */
+body.dark-mode {
+
+  --navy: #25344F;
+  --navy-light: #617891;
+  --navy-mid: #25344F;
+
+  --amber: #D5B893;
+  --amber-light: #E8DDD1;
+  --amber-dim: #6F4D38;
+
+  --cream: #25344F;
+  --paper: #617891;
+  --muted: #3B4B63;
+
+  --text-primary: #F7F6F2;
+  --text-secondary: #E8DDD1;
+  --text-muted: #D7DCE2;
+  --text-inverse: #25344F;
+
+  --card-bg: #617891;
+  --card-border: rgba(247,246,242,0.12);
+
+  background-color: #25344F !important;
+  color: #F7F6F2 !important;
+}
+
+body.dark-mode .navbar {
+  background: #25344F;
+  border-bottom: 1px solid rgba(247,246,242,0.12);
+}
+
+body.dark-mode .card,
+body.dark-mode .hero-box,
+body.dark-mode .auth-card,
+body.dark-mode .profile-card,
+body.dark-mode .admin-card {
+  background: #617891;
+  color: #F7F6F2;
+  border: 1px solid rgba(247,246,242,0.16);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode strong {
+  color: #F7F6F2;
+}
+
+body.dark-mode p,
+body.dark-mode label {
+  color: #E8DDD1;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #25344F;
+  color: #F7F6F2;
+  border-color: rgba(247,246,242,0.22);
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #D7DCE2;
+}
+
+body.dark-mode .btn,
+body.dark-mode button,
+body.dark-mode input[type="submit"] {
+  background: #6F4D38;
+  color: #F7F6F2;
+}
+
+body.dark-mode .btn:hover,
+body.dark-mode button:hover,
+body.dark-mode input[type="submit"]:hover {
+  background: #632024;
+  color: #F7F6F2;
+}
+.auth-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.auth-logo img {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
 }
