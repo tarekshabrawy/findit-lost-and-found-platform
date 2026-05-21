@@ -1,44 +1,177 @@
-# FindIt – Lost & Found Social Platform
+# FindIt Lost & Found Platform
 
-FindIt is a web-based Lost & Found platform designed to help users report, search, and recover lost belongings through an interactive social-style system.
+FindIt is a full-stack web-based lost and found platform designed to help students report, search, and recover misplaced belongings through a centralized and community-driven system.
 
-The project allows users to create accounts, log in securely, and publish posts for lost or found items including images, descriptions, locations, and dates. Other users can browse the feed, comment on posts, and contact the finder or owner to help return items.
+The platform allows users to create accounts, publish lost or found item posts, upload images, comment on reports, update item status, and interact with other users through a social-style interface. The system also includes profile management, responsive design, dark/light theme support, and an admin dashboard for moderation.
 
-Inspired by the simplicity of social media platforms, FindIt provides an easy and organized way to connect people and solve the common problem of lost personal items in universities, workplaces, malls, and public places.
+---
 
-## Main Features
+# Features
 
-- User Registration and Login
-- Post Lost or Found Items
-- Upload Item Images
-- News Feed Style Homepage
+- User Registration & Authentication
+- Lost Item Reporting
+- Found Item Reporting
+- Image Upload Support
+- Community Feed
 - Comment System
-- Contact Between Users
-- Search and Filter Items
-- User Profiles
-- Admin Management Panel
-- Mark Items as Resolved
+- Item Status Tracking
+- User Profile Management
+- Admin Dashboard & Moderation
+- Dark/Light Theme Support
+- Responsive User Interface
 
-## Technologies Used
+---
 
+# Technologies Used
+
+- PHP
+- MySQL
 - HTML5
 - CSS3
 - JavaScript
+- XAMPP
+
+---
+
+# System Architecture
+
+FindIt follows a traditional three-layer web architecture:
+
+## Presentation Layer
+Handles:
+- User Interface
+- Responsive Design
+- Theme Switching
+- Navigation Menu
+- Client-side Interaction
+
+Technologies:
+- HTML
+- CSS
+- JavaScript
+
+---
+
+## Application Layer
+Handles:
+- Authentication
+- Session Management
+- Post Creation
+- Comment Handling
+- Profile Management
+- Admin Operations
+
+Technology:
 - PHP
+
+---
+
+## Data Layer
+Handles:
+- User Data
+- Posts
+- Comments
+- Images
+- Status Tracking
+
+Technology:
 - MySQL
 
-## Project Goal
+---
 
-The goal of FindIt is to create a practical and user-friendly digital solution that increases the chances of returning lost items quickly and efficiently while encouraging community cooperation.
+# Main Modules
 
-## Future Enhancements
+## Authentication Module
+- User registration
+- Login & logout
+- Session handling
+- Role management
 
-- Private Messaging System
-- Email Notifications
-- AI Image Matching for Similar Items
-- Location Map Integration
-- Mobile Application Version
+## Community Feed Module
+- Lost/found item posts
+- Image uploads
+- Comments
+- Status updates
 
-## Team Project
+## Profile Module
+- Profile editing
+- Profile pictures
+- User information management
 
-This project is developed as part of a Web Programming course and demonstrates front-end, back-end, database, and collaborative development skills.
+## Admin Dashboard
+- User moderation
+- Post moderation
+- Comment management
+
+---
+
+# Database Design
+
+The platform uses three main database tables:
+
+| Table | Purpose |
+|------|------|
+| users | Stores account and profile information |
+| posts | Stores lost/found item reports |
+| comments | Stores user comments |
+
+---
+
+# Project Structure
+
+```bash
+findit-lost-and-found-platform/
+│
+├── database/
+├── uploads/
+├── css/
+├── js/
+├── docs/
+├── login.php
+├── register.php
+├── feed.php
+├── profile.php
+├── admin_dashboard.php
+└── README.md
+```
+
+---
+
+# Main Workflow
+
+1. User registers or logs in
+2. User creates lost/found item post
+3. Image is uploaded and stored
+4. Post appears in community feed
+5. Other users can comment or interact
+6. Item status can be updated
+7. Admin can moderate platform content
+
+---
+
+# Future Improvements
+
+- Direct messaging between users
+- Advanced search and filtering
+- Email notifications
+- QR-code item tracking
+- AI-based item matching
+- Live deployment
+
+---
+
+# Documentation
+
+Full IEEE-style technical documentation is included inside the repository:
+
+```bash
+docs/FindIt_IEEE_Documentation.docx
+```
+
+---
+
+# Author
+
+Tarek Shabrawy
+Ali Hamdy 
+Youssef Assem
